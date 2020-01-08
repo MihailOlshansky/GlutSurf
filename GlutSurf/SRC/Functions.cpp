@@ -31,14 +31,15 @@ void MyDisplay(void)
 {
 	double t = 1.0 * clock() / CLOCKS_PER_SEC;
 	glClearColor(0.3, 0.5, 0.7, 0);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	DrawAsix();
+	
 	glPushMatrix();
+	gluLookAt(sin(t), 1, cos(t), 0, 0, 0, 0, 1, 0);
 		glPushMatrix();
 			glRotated(10 * t, 1, 1, 0);
 			glColor3d(0.2, 0.2, 0.6);
-			glutWireCube(0.2);
+			glutWireCube(.2);
 		glPopMatrix();
 		
 		glPushMatrix();
@@ -46,6 +47,7 @@ void MyDisplay(void)
 			glTranslated(0.5, 0, 0.2);
 			glutWireSphere(0.2, 100, 10);
 		glPopMatrix();
+	DrawAsix();
 	glPopMatrix();
 
 	glFinish();
